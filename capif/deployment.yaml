@@ -1,0 +1,409 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: redis
+  template:
+    metadata:
+      labels:
+        app: redis
+    spec:
+      containers:
+      - name: redis
+        image: redis:alpine
+        env:
+          - name: REDIS_REPLICATION_MODE
+            value: master
+        resources:
+          limits:
+            cpu: 100m
+            memory: 128Mi
+        ports:
+        - containerPort: 6379
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-invoker-management
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: api-invoker-management
+  template:
+    metadata:
+      labels:
+        app: api-invoker-management
+    spec:
+      containers:
+      - name: api-invoker-management
+        image: dimfrag/api_invoker_management_api:latest
+        resources:
+          limits:
+            cpu: 100m
+            memory: 128Mi
+          requests:
+            cpu: 100m
+            memory: 128Mi
+        ports:
+        - containerPort: 8080
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-provider-management
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: api-provider-management
+  template:
+    metadata:
+      labels:
+        app: api-provider-management
+    spec:
+      containers:
+      - name: api-provider-management
+        image:  dimfrag/api_provider_management_api:latest
+        resources:
+          limits:
+            cpu: 100m
+            memory: 128Mi
+          requests:
+            cpu: 100m
+            memory: 128Mi
+        ports:
+        - containerPort: 8080
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: logs
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: logs
+  template:
+    metadata:
+      labels:
+        app: logs
+    spec:
+      containers:
+      - name: logs
+        image: dimfrag/auditing_api:latest
+        resources:
+          limits:
+            cpu: 100m
+            memory: 128Mi
+        ports:
+        - containerPort: 8080
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: service-apis
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: service-apis
+  template:
+    metadata:
+      labels:
+        app: service-apis
+    spec:
+      containers:
+      - name: service-apis
+        image: dimfrag/discover_service_api:latest
+        resources:
+          limits:
+            cpu: 100m
+            memory: 128Mi
+        ports:
+        - containerPort: 8080
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: capif-events
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: capif-events
+  template:
+    metadata:
+      labels:
+        app: capif-events
+    spec:
+      containers:
+      - name: capif-events
+        image: dimfrag/events_api:latest
+        resources:
+          limits:
+            cpu: 100m
+            memory: 128Mi
+          requests:
+            cpu: 100m
+            memory: 128Mi
+        ports:
+        - containerPort: 8080
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-invocation-logs
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: api-invocation-logs
+  template:
+    metadata:
+      labels:
+        app: api-invocation-logs
+    spec:
+      containers:
+      - name: api-invocation-logs
+        image: dimfrag/api_invocation_logs_api:latest
+        env:
+          - name: CAPIF_HOSTNAME
+            value: capifcore
+        resources:
+          limits:
+            cpu: 100m
+            memory: 128Mi
+          requests:
+            cpu: 100m
+            memory: 128Mi
+        ports:
+        - containerPort: 8080
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: published-apis
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: published-apis
+  template:
+    metadata:
+      labels:
+        app: published-apis
+    spec:
+      containers:
+      - name: published-apis
+        image: dimfrag/publish_service_api:latest
+        resources:
+          limits:
+            cpu: 100m
+            memory: 128Mi
+          requests:
+            cpu: 100m
+            memory: 128Mi
+        ports:
+        - containerPort: 8080
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: capif-routing-info
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: capif-routing-info
+  template:
+    metadata:
+      labels:
+        app: capif-routing-info
+    spec:
+      containers:
+      - name: capif-routing-info
+        image: dimfrag/routing_info_api:latest
+        resources:
+          limits:
+            cpu: 100m
+            memory: 128Mi
+          requests:
+            cpu: 100m
+            memory: 128Mi
+        ports:
+        - containerPort: 8080
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: capif-security
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: capif-security
+  template:
+    metadata:
+      labels:
+        app: capif-security
+    spec:
+      containers:
+      - name: capif-security
+        image: dimfrag/security_api:latest
+        env:
+          - name: CAPIF_HOSTNAME
+            value: capifcore
+        resources:
+          limits:
+            cpu: 100m
+            memory: 128Mi
+          requests:
+            cpu: 100m
+            memory: 128Mi
+        ports:
+        - containerPort: 8080
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: easy-rsa
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: easy-rsa
+  template:
+    metadata:
+      labels:
+        app: easy-rsa
+    spec:
+      containers:
+      - name: easy-rsa
+        image: dimfrag/easy-rsa:latest
+        resources:
+          limits:
+            cpu: 100m
+            memory: 128Mi
+          requests:
+            cpu: 100m
+            memory: 128Mi
+        ports:
+        - containerPort: 8080
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jwtauth
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: jwtauth
+  template:
+    metadata:
+      labels:
+        app: jwtauth
+    spec:
+      containers:
+      - name: jwtauth
+        image: dimfrag/jwtauth:latest
+        resources:
+          limits:
+            cpu: 100m
+            memory: 128Mi
+        ports:
+        - containerPort: 8080
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: capif-mongo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: capif-mongo
+  template:
+    metadata:
+      labels:
+        app: capif-mongo
+    spec:
+      containers:
+      - name: capif-mongo
+        image: mongo:4.4.10
+        env:
+          - name: MONGO_INITDB_ROOT_USERNAME
+            value: root
+          - name: MONGO_INITDB_ROOT_PASSWORD
+            value: example
+        resources:
+          limits:
+            cpu: 100m
+            memory: 128Mi
+        ports:
+        - containerPort: 27017
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: capif-mongo-express
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: capif-mongo-express
+  template:
+    metadata:
+      labels:
+        app: capif-mongo-express
+    spec:
+      containers:
+      - name: capif-mongo-express
+        image: mongo-express:1.0.0-alpha.4
+        env:
+          - name: ME_CONFIG_MONGODB_ADMINUSERNAME
+            value: root
+          - name: ME_CONFIG_MONGODB_ADMINPASSWORD
+            value: example
+          - name: ME_CONFIG_MONGODB_URL
+            value: mongodb://root:example@mongo:27017/
+        resources:
+          limits:
+            cpu: 100m
+            memory: 128Mi
+        ports:
+        - containerPort: 8082
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: dimfrag/nginx:latest
+        env:
+          - name: CAPIF_HOSTNAME
+            value: capifcore
+        resources:
+          limits:
+            cpu: 100m
+            memory: 128Mi
+        ports:
+        - containerPort: 8080
+        - containerPort: 443
+
