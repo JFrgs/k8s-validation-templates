@@ -3,11 +3,11 @@ kind: Ingress
 metadata:
   name: nef-ingress
   labels:
-    app: reverse-proxy
+    app: nginx-ingress
 spec:
   ingressClassName: nginx
   rules:
-    - host: nef.io
+    - host: example.nef.com
       http:
         paths:
           - path: /

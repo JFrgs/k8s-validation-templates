@@ -175,6 +175,8 @@ spec:
         - name: backend
           image: dimfrag/nef-backend:1.0
           imagePullPolicy: Always
+          ports:
+             - containerPort: 80
           command: ["/start-reload.sh"]
           env:
             - name: SERVER_NAME
