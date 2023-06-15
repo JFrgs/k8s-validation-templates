@@ -279,53 +279,47 @@ spec:
                 configMapKeyRef:
                   name: nef-configmap
                   key: USE_PUBLIC_KEY_VERIFICATION
-# ---
-# apiVersion: apps/v1
-# kind: Deployment
-# metadata:
-#   name: reverse-proxy
-# spec:
-#   replicas: 1
-#   selector:
-#     matchLabels:
-#       app: reverse-proxy
-#   template:
-#     metadata:
-#       labels:
-#         app: reverse-proxy
-#     spec:
-#       containers:
-#         - name: reverse-proxy
-#           image: dimfrag/nef-nginx:1.0
-#           command:
-#             - "/bin/sh"
-#             - "-c"
-#             - "/self-signed-crt.sh && /dynamic_ports.sh"
-#           ports:
-#             - containerPort: 80
-#             - containerPort: 443
-#           volumeMounts:
-#             - name: nginxdata
-#               mountPath: /var/log/nginx
-#           env:
-#             - name: APP_ENV
-#               value: prod
-#             - name: APP_NAME
-#               value: webserver
-#             - name: APP_DEBUG
-#               value: "false"
-#             - name: SERVICE_NAME
-#               value: webserver
-#             - name: NGINX_HTTP
-#               valueFrom:
-#                 configMapKeyRef:
-#                   name: nef-configmap
-#                   key: NGINX_HTTP
-#             - name: NGINX_HTTPS
-#               valueFrom:
-#                 configMapKeyRef:
-#                   name: nef-configmap
-#                   key: NGINX_HTTPS
-#       volumes:
-#         - name: nginxdata
-#           emptyDir: {}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: reverse-proxy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: reverse-proxy
+  template:
+    metadata:
+      labels:
+        app: reverse-proxy
+    spec:
+      containers:
+        - name: reverse-proxy
+          image: dimfrag/nef-nginx:1.0
+          command:
+            - "/bin/sh"
+            - "-c"
+            - "/self-signed-crt.sh && /dynamic_ports.sh"
+          ports:
+            - containerPort: 80
+            - containerPort: 443
+          env:
+            - name: APP_ENV
+              value: prod
+            - name: APP_NAME
+              value: webserver
+            - name: APP_DEBUG
+              value: "false"
+            - name: SERVICE_NAME
+              value: webserver
+            - name: NGINX_HTTP
+              valueFrom:
+                configMapKeyRef:
+                  name: nef-configmap
+                  key: NGINX_HTTP
+            - name: NGINX_HTTPS
+              valueFrom:
+                configMapKeyRef:
+                  name: nef-configmap
+                  key: NGINX_HTTPS

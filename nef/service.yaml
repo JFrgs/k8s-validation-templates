@@ -53,20 +53,20 @@ spec:
     - protocol: TCP
       port: 80
       targetPort: 80
-# ---
-# apiVersion: v1
-# kind: Service
-# metadata:
-#   name: reverse-proxy
-# spec:
-#   selector:
-#     app: reverse-proxy
-#   ports:
-#     - name: http-port
-#       protocol: TCP
-#       port: 8090
-#       targetPort: 80
-#     - name: https-port
-#       protocol: TCP
-#       port: 4443
-#       targetPort: 443
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: reverse-proxy
+spec:
+  selector:
+    app: reverse-proxy
+  ports:
+    - name: http-port
+      protocol: TCP
+      port: 8090
+      targetPort: 80
+    - name: https-port
+      protocol: TCP
+      port: 4443
+      targetPort: 443
