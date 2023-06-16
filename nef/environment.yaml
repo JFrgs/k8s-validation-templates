@@ -33,7 +33,7 @@ data:
   PGADMIN_DEFAULT_PASSWORD: pass
   MONGO_USER: root
   MONGO_PASSWORD: pass
-  MONGO_CLIENT: mongodb://mongo_nef:27017/
+  MONGO_CLIENT: mongodb://nef-mongo:27017/
   MONGO_EXPRESS_ENABLE_ADMIN: "true"
   ME_CONFIG_MONGODB_URL: mongodb://root:pass@nef-mongo:27017/
   DOCKER_IMAGE_PROXY: dimfrag/nef-nginx
