@@ -31,10 +31,23 @@ spec:
                 name: nef-backend
                 port:
                   number: 80
-          - path: /capif-mongo
+    - host: mongocapif.com
+      http:
+        paths: 
+          - path: /
             pathType: Prefix
             backend:
               service:
                 name: capif-mongo-express
                 port:
                   number: 8082
+    - host: mongonef.com
+      http:
+        paths:    
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: mongo-express
+                port:
+                  number: 8081

@@ -35,7 +35,7 @@ data:
   MONGO_PASSWORD: pass
   MONGO_CLIENT: mongodb://mongo_nef:27017/
   MONGO_EXPRESS_ENABLE_ADMIN: "true"
-  ME_CONFIG_MONGODB_URL: mongodb://root:pass@mongo-nef:27017/
+  ME_CONFIG_MONGODB_URL: mongodb://root:pass@nef-mongo:27017/
   DOCKER_IMAGE_PROXY: dimfrag/nef-nginx
   PROXY_TAG: "1.0"
   NGINX_HTTP: "8090"

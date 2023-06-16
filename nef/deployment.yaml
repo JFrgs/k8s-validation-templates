@@ -84,20 +84,22 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: mongo-nef
+  name: nef-mongo
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: mongo-nef
+      app: nef-mongo
   template:
     metadata:
       labels:
-        app: mongo-nef
+        app: nef-mongo
     spec:
       containers:
-        - name: mongo-nef
+        - name: nef-mongo
           image: mongo:4.4.10
+          ports:
+          - containerPort: 27017
           volumeMounts:
             - name: app-mongo-db-data
               mountPath: /data/db
@@ -116,47 +118,42 @@ spec:
         - name: app-mongo-db-data
           emptyDir: {}
 ---
-# apiVersion: apps/v1
-# kind: Deployment
-# metadata:
-#   name: mongo-express
-# spec:
-#   replicas: 1
-#   selector:
-#     matchLabels:
-#       app: mongo-express
-#   template:
-#     metadata:
-#       labels:
-#         app: mongo-express
-#     spec:
-#       containers:
-#         - name: mongo-express
-#           image: mongo-express:1.0.0-alpha.4
-#           ports:
-#             - containerPort: 8081
-#           env:
-#             - name: ME_CONFIG_MONGODB_ADMINUSERNAME
-#               valueFrom:
-#                 configMapKeyRef:
-#                   name: nef-configmap
-#                   key: MONGO_USER
-#             - name: ME_CONFIG_MONGODB_ADMINPASSWORD
-#               valueFrom:
-#                 configMapKeyRef:
-#                   name: nef-configmap
-#                   key: MONGO_PASSWORD
-#             - name: ME_CONFIG_MONGODB_URL
-#               valueFrom:
-#                 configMapKeyRef:
-#                   name: nef-configmap
-#                   key: ME_CONFIG_MONGODB_URL
-#             - name: ME_CONFIG_MONGODB_ENABLE_ADMIN
-#               valueFrom: 
-#                 configMapKeyRef:
-#                     name: nef-configmap
-#                     key: MONGO_EXPRESS_ENABLE_ADMIN
-# ---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mongo-express
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mongo-express
+  template:
+    metadata:
+      labels:
+        app: mongo-express
+    spec:
+      containers:
+        - name: mongo-express
+          image: mongo-express:1.0.0-alpha.4
+          ports:
+          - containerPort: 8081
+          env:
+            - name: ME_CONFIG_MONGODB_ADMINUSERNAME
+              valueFrom:
+                configMapKeyRef:
+                  name: nef-configmap
+                  key: MONGO_USER
+            - name: ME_CONFIG_MONGODB_ADMINPASSWORD
+              valueFrom:
+                configMapKeyRef:
+                  name: nef-configmap
+                  key: MONGO_PASSWORD
+            - name: ME_CONFIG_MONGODB_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: nef-configmap
+                  key: ME_CONFIG_MONGODB_URL
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:

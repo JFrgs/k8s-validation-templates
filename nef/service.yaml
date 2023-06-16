@@ -26,21 +26,21 @@ metadata:
   name: nef-mongo
 spec:
   selector:
-    app: mongo-nef
+    app: nef-mongo
   ports:
     - protocol: TCP
       port: 27017
-# ---
-# apiVersion: v1
-# kind: Service
-# metadata:
-#   name: mongo-express
-# spec:
-#   selector:
-#     app: mongo-express
-#   ports:
-#     - protocol: TCP
-#       port: 8081
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mongo-express
+spec:
+  selector:
+    app: mongo-express
+  ports:
+    - protocol: TCP
+      port: 8081
 ---
 apiVersion: v1
 kind: Service
@@ -57,7 +57,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: reverse-proxy
+  name: nefemu
 spec:
   selector:
     app: reverse-proxy

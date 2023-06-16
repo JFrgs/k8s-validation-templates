@@ -42,6 +42,7 @@ spec:
       containers:
       - name: api-invoker-management
         image: dimfrag/api_invoker_management_api:latest
+        imagePullPolicy: Always
         resources:
           limits:
             cpu: 100m
@@ -69,6 +70,7 @@ spec:
       containers:
       - name: api-provider-management
         image:  dimfrag/api_provider_management_api:latest
+        imagePullPolicy: Always
         resources:
           limits:
             cpu: 100m
@@ -96,6 +98,7 @@ spec:
       containers:
       - name: logs
         image: dimfrag/auditing_api:latest
+        imagePullPolicy: Always
         resources:
           limits:
             cpu: 100m
@@ -120,6 +123,7 @@ spec:
       containers:
       - name: service-apis
         image: dimfrag/discover_service_api:latest
+        imagePullPolicy: Always
         resources:
           limits:
             cpu: 100m
@@ -144,6 +148,7 @@ spec:
       containers:
       - name: capif-events
         image: dimfrag/events_api:latest
+        imagePullPolicy: Always
         resources:
           limits:
             cpu: 100m
@@ -171,6 +176,7 @@ spec:
       containers:
       - name: api-invocation-logs
         image: dimfrag/api_invocation_logs_api:latest
+        imagePullPolicy: Always
         env:
           - name: CAPIF_HOSTNAME
             value: capifcore
@@ -201,6 +207,7 @@ spec:
       containers:
       - name: published-apis
         image: dimfrag/publish_service_api:latest
+        imagePullPolicy: Always
         resources:
           limits:
             cpu: 100m
@@ -228,6 +235,7 @@ spec:
       containers:
       - name: capif-routing-info
         image: dimfrag/routing_info_api:latest
+        imagePullPolicy: Always
         resources:
           limits:
             cpu: 100m
@@ -255,6 +263,7 @@ spec:
       containers:
       - name: capif-security
         image: dimfrag/security_api:latest
+        imagePullPolicy: Always
         env:
           - name: CAPIF_HOSTNAME
             value: capifcore
@@ -285,6 +294,7 @@ spec:
       containers:
       - name: easy-rsa
         image: dimfrag/easy-rsa:latest
+        imagePullPolicy: Always
         resources:
           limits:
             cpu: 100m
@@ -312,6 +322,7 @@ spec:
       containers:
       - name: jwtauth
         image: dimfrag/jwtauth:latest
+        imagePullPolicy: Always
         resources:
           limits:
             cpu: 100m
@@ -396,6 +407,7 @@ spec:
       containers:
       - name: nginx
         image: dimfrag/nginx:latest
+        imagePullPolicy: Always
         env:
           - name: CAPIF_HOSTNAME
             value: capifcore
