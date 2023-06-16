@@ -1,0 +1,113 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: zortenetapp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: zortenetapp
+  template:
+    metadata:
+      labels:
+        app: zortenetapp
+    spec:
+      containers:
+        - name: zortenetapp
+          image: andreasoikonomakis/zortenetnetapp_app
+          imagePullPolicy: Always 
+          env:
+            - name: NEF_IP
+              valueFrom:
+                configMapKeyRef:
+                  name: zorte-configmap
+                  key: NEF_IP
+            - name: NEF_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: zorte-configmap
+                  key: NEF_PORT
+            - name: NEF_USER
+              valueFrom:
+                configMapKeyRef:
+                  name: zorte-configmap
+                  key: NEF_USER
+            - name: NEF_PASS
+              valueFrom:
+                configMapKeyRef:
+                  name: zorte-configmap
+                  key: NEF_PASS
+            - name: PATH_TO_CERTS
+              valueFrom:
+                configMapKeyRef:
+                  name: zorte-configmap
+                  key: PATH_TO_CERTS
+            - name: CAPIF_HOSTNAME
+              valueFrom:
+                configMapKeyRef:
+                  name: zorte-configmap
+                  key: CAPIF_HOSTNAME
+            - name: CAPIF_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: zorte-configmap
+                  key: CAPIF_PORT
+            - name: CAPIF_PORT_HTTPS
+              valueFrom:
+                configMapKeyRef:
+                  name: zorte-configmap
+                  key: CAPIF_PORT_HTTPS
+            - name: CAPIF_IP
+              valueFrom:
+                configMapKeyRef:
+                  name: zorte-configmap
+                  key: CAPIF_IP
+            - name: NEF_CALLBACK_IP
+              valueFrom:
+                configMapKeyRef:
+                  name: zorte-configmap
+                  key: NEF_CALLBACK_IP
+            - name: NEF_CALLBACK_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: zorte-configmap
+                  key: NEF_CALLBACK_PORT
+            - name: INFLUX_IP
+              valueFrom:
+                configMapKeyRef:
+                  name: zorte-configmap
+                  key: INFLUX_IP
+            - name: INFLUX_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: zorte-configmap
+                  key: INFLUX_PORT
+          ports:
+          - containerPort: 5000
+---  
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: influxdb
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: influxdb
+  template:
+    metadata:
+      labels:
+        app: influxdb
+    spec:
+      containers:
+        - name: influxdb
+          image: influxdb:1.8-alpine
+          env:
+            - name: INFLUXDB_DB
+              value: influx
+            - name: INFLUXDB_ADMIN_USER
+              value: admin
+            - name: INFLUXDB_ADMIN_PASSWORD
+              value: admin
+          ports:
+          - containerPort: 8086
