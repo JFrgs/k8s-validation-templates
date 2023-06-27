@@ -61,16 +61,16 @@ spec:
     #             name: zortenetapp
     #             port:
     #               number: 5000
-    - host: iqbitnetapp.com
-      http:
-        paths:    
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: iqbnetapp
-                port:
-                  number: 5000
+    # - host: iqbitnetapp.com
+    #   http:
+    #     paths:    
+    #       - path: /
+    #         pathType: Prefix
+    #         backend:
+    #           service:
+    #             name: iqbnetapp
+    #             port:
+    #               number: 5000
     - host: fogusnetapp-backend.com
       http:
         paths:    
