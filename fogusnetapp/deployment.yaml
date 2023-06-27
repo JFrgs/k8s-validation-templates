@@ -1,0 +1,71 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fogusnetworkapp-dep-db
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: fogusnetworkapp-pod-db
+  template:
+    metadata:
+      labels:
+        app: fogusnetworkapp-pod-db
+    spec:
+      containers:
+        - name: netapppostgres
+          image: vtsolkas/fogus-network-app:netapppostgres-10.1
+          imagePullPolicy: Always 
+          envFrom:
+          - configMapRef:
+              name: fogus-configmap
+          ports:
+          - containerPort: 5432
+---  
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fogusnetworkapp-dep-be
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: fogusnetworkapp-pod-be
+  template:
+    metadata:
+      labels:
+        app: fogusnetworkapp-pod-be
+    spec:
+      containers:
+      - name: netappdjango
+        image: vtsolkas/fogus-network-app:netappdjango-1.1.0
+        imagePullPolicy: Always 
+        envFrom:
+        - configMapRef:
+            name: fogus-configmap
+        ports:
+        - containerPort: 8000
+---  
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fogusnetworkapp-dep-fe
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: fogusnetworkapp-pod-fe
+  template:
+    metadata:
+      labels:
+        app: fogusnetworkapp-pod-fe
+    spec:
+      containers:
+      - name: netappfe
+        image: vtsolkas/fogus-network-app:netappfe-1.1.0
+        imagePullPolicy: Always 
+        envFrom:
+        - configMapRef:
+            name: fogus-configmap
+        ports:
+        - containerPort: 4200
