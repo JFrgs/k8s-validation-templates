@@ -25,3 +25,6 @@ This repository is organized as follows:
 - `nginx-manifests`: Includes the manifest to set up the Nginx Ingress Controller. Through ingress rules (hostnames), it forwards incoming requests to the K8s services and subsequently to the respective pods where the containers reside.
 - `MetalLB`: Provides the required resources for MetalLB, which assigns an external IP address to the Nginx Ingress Controller. This enables accessibility within the NCSRD infrastructure. (through VPN)
 
+### Topology 
+
+![Alt Text](k8s-evolved-prox.png)
