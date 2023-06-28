@@ -80,7 +80,7 @@ spec:
               service:
                 name: fogusnetworkapp-svc-be
                 port:
-                  number: 8080
+                  number: 8000
     - host: fogusnetapp-frontend.com
       http:
         paths:    

@@ -38,8 +38,9 @@ spec:
     spec:
       containers:
       - name: netappdjango
-        image: vtsolkas/fogus-network-app:netappdjango-1.1.0
+        image: vtsolkas/fogus-network-app:netappdjango-1.1.1
         imagePullPolicy: Always 
+        command: ["./wait_db.sh", "$(POSTGRES_SERVER):$(POSTGRES_PORT)", "--", "sh", "docker_start_up.sh"]
         envFrom:
         - configMapRef:
             name: fogus-configmap

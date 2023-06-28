@@ -8,11 +8,14 @@ data:
   NEF_PASSWORD: pass
   PATH_TO_CERTS: /code/capif_onboarding
   CAPIF_HOSTNAME: capifcore
-  CAPIF_PORT: "8080"
+  CAPIF_PORT_HTTP: "8080"
   CAPIF_PORT_HTTPS: "443"
   CALLBACK_ADDRESS: fogusnetworkapp-svc-be:8000
   FRONTEND_ADDRESS: fogusnetworkapp-svc-fe:4200
   NETAPP_ADDRESS: fogusnetworkapp-svc-be:8000
+  POSTGRES_SERVER: fogusnetworkapp-svc-db
+  POSTGRES_URI: fogusnetworkapp-svc-db
+  POSTGRES_PORT: "5432"
   POSTGRES_DB: evolvedb
   POSTGRES_USER: evolveclient
   POSTGRES_PASSWORD: evolvepass
