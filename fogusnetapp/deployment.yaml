@@ -63,7 +63,7 @@ spec:
     spec:
       containers:
       - name: netappfe
-        image: vtsolkas/fogus-network-app:netappfe-1.1.0
+        image: vtsolkas/fogus-network-app:netappfe-1.1.1
         imagePullPolicy: Always 
         envFrom:
         - configMapRef:

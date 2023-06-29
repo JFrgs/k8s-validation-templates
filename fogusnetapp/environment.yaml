@@ -10,12 +10,13 @@ data:
   CAPIF_HOSTNAME: capifcore
   CAPIF_PORT_HTTP: "8080"
   CAPIF_PORT_HTTPS: "443"
-  CALLBACK_ADDRESS: fogusnetworkapp-svc-be:8000
-  FRONTEND_ADDRESS: fogusnetworkapp-svc-fe:4200
-  NETAPP_ADDRESS: fogusnetworkapp-svc-be:8000
+  CALLBACK_ADDRESS: http://fogusnetworkapp-svc-be:8000
+  BACKEND_ADDRESS: https://fogusnetapp-backend.com
+  FRONTEND_ADDRESS: https://fogusnetapp-frontend.com
   POSTGRES_SERVER: fogusnetworkapp-svc-db
   POSTGRES_URI: fogusnetworkapp-svc-db
   POSTGRES_PORT: "5432"
   POSTGRES_DB: evolvedb
   POSTGRES_USER: evolveclient
   POSTGRES_PASSWORD: evolvepass
+  VAPP_ADDRESS: 195.134.66.79:8443
