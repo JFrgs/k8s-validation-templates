@@ -1,0 +1,39 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: 8bells-configmap
+data:
+  # host="10.10.10.35"
+  # host: "172.17.0.1"
+
+  #host_url: http://${host}
+
+  #NETAPP
+  netapp_name: "myNetapp"
+  netapp_ip: http://172.17.0.1:5000
+  netapp_port: "5000"
+
+  #VAPP
+  vapp_ip: "10.161.1.116"
+  vapp_user: "root"
+  vapp_pass: "8bellsadmin"
+
+  #NEF
+  nef_ip: https://nefemu:4443
+  nef_user: "admin@my-email.com"
+  nef_password: "pass"
+  nef_port: "4443"
+
+  callback_address: "http://bellsnetapp-svc:5000/monitoring/callback"
+  capifhost: "capifcore"
+
+  #DB VARIABLES
+  postgres_db: "postgres"
+  postgres_username: "postgres"
+  postgres_password: "postgres"
+  postgres_port: "5432"
+
+  #ADMINER VARIABLES
+  adminer_password: "1234"
+  adminer_port_one: "8008"
+  adminer_port_two: "8080"

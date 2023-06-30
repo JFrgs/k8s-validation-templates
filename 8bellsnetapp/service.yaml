@@ -1,0 +1,36 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: bellsnetapp-svc
+spec:
+  selector:
+    app: 8bellsnetapp
+  ports:
+    - protocol: TCP
+      port: 5000
+      targetPort: 5000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres-svc
+spec:
+  selector:
+    app: postgres
+  ports:
+    - protocol: TCP
+      port: 5432
+      targetPort: 5432
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: adminer-svc
+spec:
+  selector:
+    app: adminer
+  ports:
+    - protocol: TCP
+      port: 8008
+      targetPort: 8080
+

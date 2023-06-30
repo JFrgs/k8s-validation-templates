@@ -1,0 +1,106 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: 8bellsnetapp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: 8bellsnetapp
+  template:
+    metadata:
+      labels:
+        app: 8bellsnetapp
+    spec:
+      containers:
+        - name: 8bellsnetapp
+          image: vasilis8/8bellsnetapp
+          imagePullPolicy: Always 
+          envFrom:
+          - configMapRef:
+              name: 8bells-configmap
+          env:
+            - name: NETAPP_NAME
+              value: $(netapp_name)
+            - name: NETAPP_IP
+              value: $(netapp_ip)
+            - name: NEF_IP
+              value: $(nef_ip)
+            - name: NEF_USER
+              value: $(nef_user)
+            - name: NEF_PASS
+              value: $(nef_password)
+            - name: NEF_PORT
+              value: $(nef_port)
+            - name: CALLBACK_ADR
+              value: $(callback_address)
+            - name: DB_NAME
+              value: $(postgres_db)
+            - name: DB_USERNAME
+              value: $(postgres_username)
+            - name: DB_PASS
+              value: $(postgres_password)
+            - name: DB_PORT
+              value: $(postgres_port)
+            - name: CAPIF_HOSTNAME
+              value: $(capifhost)
+            - name: CAPIF_PORT_HTTP
+              value: "8080"
+            - name: CAPIF_PORT_HTTPS
+              value: "443"
+            - name: CALLBACK_ADDRESS
+              value: $(callback_address)
+            - name: VAPP_IP
+              value: $(vapp_ip)
+            - name: VAPP_USER
+              value: $(vapp_user)
+            - name: VAPP_PASS
+              value: $(vapp_pass)
+          ports:
+          - containerPort: 5000
+---  
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgres-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postgres
+  template:
+    metadata:
+      labels:
+        app: postgres
+    spec:
+      containers:
+        - name: postgres
+          image: postgres:14
+          ports:
+            - containerPort: 5432
+          envFrom:
+          - configMapRef:
+              name: 8bells-configmap
+          env:
+            - name: POSTGRES_PASSWORD
+              value: $(postgres_password)
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: adminer
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: adminer
+  template:
+    metadata:
+      labels:
+        app: adminer
+    spec:
+      containers:
+        - name: adminer
+          image: adminer:4.7
+          ports:
+            - containerPort: 8080

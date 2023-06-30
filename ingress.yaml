@@ -71,23 +71,33 @@ spec:
     #             name: iqbnetapp
     #             port:
     #               number: 5000
-    - host: fogusnetapp-backend.com
+    # - host: fogusnetapp-backend.com
+    #   http:
+    #     paths:    
+    #       - path: /
+    #         pathType: Prefix
+    #         backend:
+    #           service:
+    #             name: fogusnetworkapp-svc-be
+    #             port:
+    #               number: 8000
+    # - host: fogusnetapp-frontend.com
+    #   http:
+    #     paths:    
+    #       - path: /
+    #         pathType: Prefix
+    #         backend:
+    #           service:
+    #             name: fogusnetworkapp-svc-fe
+    #             port:
+    #               number: 4200
+    - host: bellsnetapp.com
       http:
         paths:    
           - path: /
             pathType: Prefix
             backend:
               service:
-                name: fogusnetworkapp-svc-be
+                name: bellsnetapp-svc
                 port:
-                  number: 8000
-    - host: fogusnetapp-frontend.com
-      http:
-        paths:    
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: fogusnetworkapp-svc-fe
-                port:
-                  number: 4200
+                  number: 5000
