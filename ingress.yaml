@@ -51,36 +51,36 @@ spec:
                 name: mongo-express
                 port:
                   number: 8081
-    - host: zortenetapp.com
-      http:
-        paths:    
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: zortenetapp
-                port:
-                  number: 5000
-    - host: zorteinflux.com
-      http:
-        paths:    
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: influxdb
-                port:
-                  number: 8086
-    - host: zortegrafana.com
-      http:
-        paths:    
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: grafana
-                port:
-                  number: 3000
+    # - host: zortenetapp.com
+    #   http:
+    #     paths:    
+    #       - path: /
+    #         pathType: Prefix
+    #         backend:
+    #           service:
+    #             name: zortenetapp
+    #             port:
+    #               number: 5000
+    # - host: zorteinflux.com
+    #   http:
+    #     paths:    
+    #       - path: /
+    #         pathType: Prefix
+    #         backend:
+    #           service:
+    #             name: influxdb
+    #             port:
+    #               number: 8086
+    # - host: zortegrafana.com
+    #   http:
+    #     paths:    
+    #       - path: /
+    #         pathType: Prefix
+    #         backend:
+    #           service:
+    #             name: grafana
+    #             port:
+    #               number: 3000
     # - host: iqbitnetapp.com
     #   http:
     #     paths:    
@@ -121,3 +121,13 @@ spec:
     #             name: bellsnetapp-svc
     #             port:
     #               number: 5000
+    - host: ininnetapp.com
+      http:
+        paths:    
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: ininrmonnetapp
+                port:
+                  number: 80
