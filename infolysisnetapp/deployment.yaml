@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: infolysisnetapp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: infolysisnetapp
+  template:
+    metadata:
+      labels:
+        app: infolysisnetapp
+    spec:
+      containers:
+        - name: infolysisnetapp
+          image: cfragkos/infolysisnetapp
+          imagePullPolicy: Always
+          ports:
+          - containerPort: 80
+          - containerPort: 8000

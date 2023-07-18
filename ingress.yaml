@@ -121,13 +121,33 @@ spec:
     #             name: bellsnetapp-svc
     #             port:
     #               number: 5000
-    - host: ininnetapp.com
+    # - host: ininnetapp.com
+    #   http:
+    #     paths:    
+    #       - path: /
+    #         pathType: Prefix
+    #         backend:
+    #           service:
+    #             name: ininrmonnetapp
+    #             port:
+    #               number: 80
+    - host: infonetapp.com
       http:
         paths:    
           - path: /
             pathType: Prefix
             backend:
               service:
-                name: ininrmonnetapp
+                name: infolysisnetapp
                 port:
                   number: 80
+    - host: infolysis-api.com     
+      http:    
+        paths: 
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: infolysisnetapp
+                port:
+                  number: 8091
