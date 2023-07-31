@@ -131,23 +131,33 @@ spec:
     #             name: ininrmonnetapp
     #             port:
     #               number: 80
-    - host: infonetapp.com
-      http:
-        paths:    
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: infolysisnetapp
-                port:
-                  number: 80
-    - host: infolysis-api.com     
+    # - host: infonetapp.com
+    #   http:
+    #     paths:    
+    #       - path: /
+    #         pathType: Prefix
+    #         backend:
+    #           service:
+    #             name: infolysisnetapp
+    #             port:
+    #               number: 80
+    # - host: infolysis-api.com     
+    #   http:    
+    #     paths: 
+    #       - path: /
+    #         pathType: Prefix
+    #         backend:
+    #           service:
+    #             name: infolysisnetapp
+    #             port:
+    #               number: 8091
+    - host: gmiaeronetapp.com     
       http:    
         paths: 
           - path: /
             pathType: Prefix
             backend:
               service:
-                name: infolysisnetapp
+                name: gmiaeroapp
                 port:
-                  number: 8091
+                  number: 8383
